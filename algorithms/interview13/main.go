@@ -47,6 +47,22 @@ func (list *LinkedList) GetAt(index int) *Node {
 	return cur
 }
 
+func (list *LinkedList) IndexOf(val interface{}) int {
+	if list.head == nil {
+		return -1
+	}
+	cur := list.head
+	index := -1
+	for cur != nil {
+		index += 1
+		if cur.val == val{
+			return index
+		}
+		cur = cur.next
+	}
+	return -1
+}
+
 /*
 	在O(1)时间内删除一个链表的节点,这个节点必须是在这个链表中，否则无法在
 	O(1)时间内删除一个节点
@@ -90,8 +106,5 @@ func main() {
 	list.Append(10)
 	list.Append(3)
 
-	node := list.GetAt(5)
-	list.Delete(node)
-
-	list.Print()
+	fmt.Println(list.IndexOf(7))
 }

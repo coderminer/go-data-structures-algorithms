@@ -29,6 +29,7 @@ func (q *Queue) Dequeue() interface{} {
 	return item
 }
 
+
 func (q *Queue) Front() interface{} {
 	q.lock.Lock()
 	defer q.lock.Unlock()
@@ -46,3 +47,4 @@ func (q *Queue) Size() int {
 	defer q.lock.Unlock()
 	return len(q.elements)
 }
+

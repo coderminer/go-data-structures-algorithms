@@ -11,6 +11,7 @@ Remove(val)         // 删除二叉搜索树中的一个元素
 PreOrder()          // 前序遍历二叉搜索树
 InOrder()           // 中序遍历二叉搜索树
 PostOrder()         // 后续遍历二叉搜索树
+LevelOrder()		// 按照层级遍历二叉搜索树
 ```
 
 #### 二叉搜索树的数据结构
@@ -273,5 +274,31 @@ func postOrder(root *Node) {
 	}
 }
 ```
+
+#### LevelOrder() 按照层级遍历二叉搜索树
+
+```
+func (tree *BinarySearchTree) LevelOrder() {
+	q := queue.Queue{}
+	q.New()
+	r := tree.root
+	for r != nil{
+		fmt.Print(r.val,"->")
+		if r.left != nil{
+			q.Enqueue(r.left)
+		}
+		if r.right != nil{
+			q.Enqueue(r.right)
+		}
+		if !q.IsEmpty(){
+			front := q.Dequeue()
+			r = front.(*Node)
+		}else{
+			r = nil
+		}
+	}
+}
+```
+
 
 [源码](https://github.com/coderminer/go-data-structures-algorithms/tree/master/binarysearchtree)

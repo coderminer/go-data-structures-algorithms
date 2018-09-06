@@ -2,6 +2,7 @@ package binarysearchtree
 
 import (
 	"fmt"
+	"go-data-structures-algorithms/queue/queue"
 )
 
 type Node struct {
@@ -218,5 +219,26 @@ func postOrder(root *Node) {
 		postOrder(root.right)
 		postOrder(root.left)
 		fmt.Print(root.val, "->")
+	}
+}
+
+func (tree *BinarySearchTree) LevelOrder() {
+	q := queue.Queue{}
+	q.New()
+	r := tree.root
+	for r != nil{
+		fmt.Print(r.val,"->")
+		if r.left != nil{
+			q.Enqueue(r.left)
+		}
+		if r.right != nil{
+			q.Enqueue(r.right)
+		}
+		if !q.IsEmpty(){
+			front := q.Dequeue()
+			r = front.(*Node)
+		}else{
+			r = nil
+		}
 	}
 }

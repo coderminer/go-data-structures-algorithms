@@ -30,4 +30,6 @@ func main() {
 
 	tree.Remove(14)
 	tree.PreOrder()
+	fmt.Println()
+	tree.LevelOrder()
 }

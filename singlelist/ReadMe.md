@@ -2,7 +2,7 @@
 
 ```
 Append(item)        //在链表尾部追加新节点
-InsertAt(i,item)      //在索引i处添加新节点
+InsertAt(i,item)    //在索引i处添加新节点
 RemoveAt(i)         //删除索引i处的节点
 IndexOf(item)       //获取元素的索引
 IsEmpty()           //链表是否为空

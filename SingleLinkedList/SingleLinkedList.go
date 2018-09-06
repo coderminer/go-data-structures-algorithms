@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 )
 
 type Node struct {
@@ -12,6 +13,12 @@ type Node struct {
 type SingleLinkedList struct {
 	head *Node
 	size int
+}
+
+type LinkedList struct {
+	head *Node
+	size int
+	lock sync.RWMutex
 }
 
 func (list *SingleLinkedList) Size() int {
@@ -211,7 +218,7 @@ func (list *SingleLinkedList) Reverse() {
 func (list *SingleLinkedList) LoopDetect() bool {
 	slow := list.head
 	fast := list.head
-
+ 
 	for fast.next != nil && fast.next.next != nil {
 		slow = slow.next
 		fast = fast.next.next
@@ -220,6 +227,17 @@ func (list *SingleLinkedList) LoopDetect() bool {
 		}
 	}
 	return false
+}
+
+func (list *LinkedList) Append(val int) {
+	list.lock.Lock()
+	defer list.lock.Unlock()
+	newNode := &Node{val, nil}
+	if list.head == nil {
+		list.head = newNode
+	} else {
+
+	}
 }
 
 func main() {
@@ -234,6 +252,6 @@ func main() {
 	list.SortedInsert(7)
 	list.SortedInsert(5)
 
-	list.RemoveDuplicate()
-	list.Display()
+	r, err := list.NthNodeFromBeginning(2)
+	fmt.Println(r, err)
 }

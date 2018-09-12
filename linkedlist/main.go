@@ -27,6 +27,18 @@ func main() {
 	list.RemoveAt(5)
 	list.String()
 	fmt.Println()
-	list.InsertAt(6,7)
+	list.InsertAt(6, 7)
 	list.String()
+	list.Reverse()
+	fmt.Println()
+	list.String()
+	fmt.Println()
+	r, ok := list.NthNodeFromBegining(4)
+	fmt.Println(r, ok)
+
+	r, ok = list.NthNodeFromEnd(5)
+	fmt.Println(r, ok)
+
+	r, ok = list.NthNodeFromEnd2(5)
+	fmt.Println(r, ok)
 }

@@ -173,3 +173,87 @@ func (list *LinkedList) String() {
 		cur = cur.next
 	}
 }
+
+func (list *LinkedList) Reverse() {
+	cur := list.head
+	var prev, next *Node
+	for cur != nil {
+		next = cur.next
+		cur.next = prev
+		prev = cur
+		cur = next
+	}
+	list.head = prev
+}
+
+func (list *LinkedList) CompareList(ll *LinkedList) bool {
+	return compareListUtils(list.head, ll.head)
+}
+
+func compareListUtils(head1 *Node, head2 *Node) bool {
+	if head1 == nil && head2 == nil {
+		return true
+	} else if head1 == nil || head2 == nil || head1.item != head2.item {
+		return false
+	} else {
+		return compareListUtils(head1.next, head2.next)
+	}
+
+}
+
+func (list *LinkedList) NthNodeFromBegining(index int) (interface{}, bool) {
+	if index > list.Size() || index < 1 {
+		fmt.Println("TooFewNodes")
+		return nil, false
+	}
+	cur := list.head
+	for cur != nil && index != 1 {
+		index -= 1
+		cur = cur.next
+	}
+	return cur.item, true
+}
+
+func (list *LinkedList) NthNodeFromEnd(index int) (interface{}, bool) {
+	if index > list.Size() || index < 1 {
+		fmt.Println("TooFewNodes")
+		return nil, false
+	}
+	startIndex := list.Size() - index + 1
+	return list.NthNodeFromBegining(startIndex)
+}
+
+func (list *LinkedList) NthNodeFromEnd2(index int) (interface{}, bool) {
+	if list.head == nil || index < 1 {
+		return nil, false
+	}
+	fast := list.head
+	slow := list.head
+
+	for fast.next != nil && index != 1 {
+		index -= 1
+		fast = fast.next
+	}
+
+	for fast.next != nil {
+		fast = fast.next
+		slow = slow.next
+	}
+	return slow.item, true
+}
+
+func (list *LinkedList) LoopDetect() (*Node, bool) {
+	if list.head == nil {
+		return nil, false
+	}
+	fast := list.head
+	slow := list.head
+	for fast.next != nil && fast.next.next != nil {
+		slow = slow.next
+		fast = fast.next.next
+		if fast == slow {
+			return slow, true
+		}
+	}
+	return nil, false
+}

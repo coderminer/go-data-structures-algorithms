@@ -31,8 +31,10 @@ func (s *Stack) Pop() interface{} {
 	} else {
 		h := s.head
 		s.head = s.head.next
+		s.size -= 1
 		return h.val
 	}
+
 }
 
 func (s *Stack) Top() interface{} {
@@ -53,4 +55,35 @@ func (s *Stack) String() {
 		fmt.Print(cur.val, "->")
 		cur = cur.next
 	}
+}
+
+func (s *Stack) IsEmpty() bool {
+	return s.size == 0
+}
+
+func (s *Stack) IsBalancedParenthesis(exp string) bool {
+	for _, ch := range exp {
+		switch ch {
+		case '{', '[', '(':
+			s.Push(ch)
+		case '}':
+			val := s.Pop()
+			if val != '{' {
+				return false
+			}
+		case ']':
+			val := s.Pop()
+			if val != '[' {
+				return false
+			}
+		case ')':
+			val := s.Pop()
+			if val != '(' {
+				return false
+			}
+		}
+
+	}
+
+	return s.IsEmpty()
 }

@@ -99,3 +99,32 @@ func (list *DoubleLinkedList) String() {
 		cur = cur.next
 	}
 }
+
+func (list *DoubleLinkedList) ReverseList() {
+	cur := list.head
+	for cur != nil {
+		cur.next, cur.prev = cur.prev, cur.next
+		if cur.prev == nil {
+			list.tail = list.head
+			list.head = cur
+			return
+		}
+		cur = cur.prev
+	}
+}
+
+func (list *DoubleLinkedList) CopyListReversed(dll *DoubleLinkedList) {
+	cur := list.head
+	for cur != nil {
+		dll.Prepend(cur.val)
+		cur = cur.next
+	}
+}
+
+func (list *DoubleLinkedList) CopyList(dll *DoubleLinkedList) {
+	cur := list.head
+	for cur != nil {
+		dll.Append(cur.val)
+		cur = cur.next
+	}
+}

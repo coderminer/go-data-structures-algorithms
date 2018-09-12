@@ -23,4 +23,16 @@ func main() {
 	list.String()
 	fmt.Println()
 	list.Reverse()
+	//list.ReverseList()
+	fmt.Println()
+	list.String()
+	dll := doublelinkedlist.DoubleLinkedList{}
+
+	list.CopyListReversed(&dll)
+	fmt.Println()
+	dll.String()
+
+	list.CopyList(&dll)
+	fmt.Println()
+	dll.String()
 }
